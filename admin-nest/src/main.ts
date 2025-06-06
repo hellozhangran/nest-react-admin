@@ -2,13 +2,29 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ResponseInterceptor } from './common/interceptors/response.interceptor';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { ConfigService } from '@nestjs/config';
+
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix('api');
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    cors: true, // 开启跨域访问
+  });
+
+  const config = app.get(ConfigService);
+  const prefix = config.get('API_PREFIX') || 'api';
+  app.setGlobalPrefix(prefix);
+  
   // 全局拦截器
   app.useGlobalInterceptors(new ResponseInterceptor());
   // 全局过滤器
   app.useGlobalFilters(new HttpExceptionFilter());
-  await app.listen(process.env.PORT ?? 3000);
+
+  const port = config.get('PORT') || 3000;  
+  await app.listen(port);
+
+  console.log(`|-- admin-nest 服务启动成功!`);
+  console.log(`|-- 地址前缀: `, `http://localhost:${port}/${prefix}/`);
+  console.log(`|-- 测试API: `, `http://localhost:${port}/${prefix}/hello`);
 }
 bootstrap();
+

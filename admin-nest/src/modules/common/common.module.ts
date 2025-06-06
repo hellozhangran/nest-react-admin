@@ -10,17 +10,12 @@ import { RedisClientOptions } from '@songkeys/nestjs-redis';
       {
         imports: [ConfigModule],
         inject: [ConfigService],
-        useFactory: (config: ConfigService) => {
-          return {
-            closeClient: true,
-            readyLog: true,
-            errorLog: true,
-            config: config.get<RedisClientOptions>('redis'),
-          };
-        },
+        useFactory: (config: ConfigService) => config.get('redis')!,
       },
       true,
     ),
   ],
 })
 export class CommonModule {}
+
+
