@@ -28,7 +28,11 @@ import {
         } else {
           message = exception.message;
         }
-      } else {
+      } else if (exception instanceof Error) {
+        status = HttpStatus.INTERNAL_SERVER_ERROR;
+        message = exception.message;
+      }
+      else {
         // 未知错误
         status = HttpStatus.INTERNAL_SERVER_ERROR;
         message = 'Internal server error';

@@ -1,18 +1,19 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Body, Controller, Get, Inject, Post, Query } from '@nestjs/common';
 import { RedisService } from './modules/common/redis/redis.service';
+import { ConfigService } from '@nestjs/config';
 @Controller()
 export class AppController {
   constructor(
-    private readonly appService: AppService, 
-    private readonly redisService: RedisService
+    private readonly configService: ConfigService,
+    private readonly redisService: RedisService,
   ) {}
 
   @Get('hello')
   getHello(): string {
-    return this.appService.getHello();
+    const config = this.configService.get('perm');
+    console.log(config);
+    return 'Hello World!';
   }
-
   // set 一个redis key
   @Post('redis/set')
   async setRedis(@Body() body: any): Promise<any> {

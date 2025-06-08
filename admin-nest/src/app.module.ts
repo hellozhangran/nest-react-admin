@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -11,12 +10,14 @@ import { TagModule } from './blog/tag/tag.module';
 import redisConfig from './config/redis.config';
 import databaseConfig from './config/mysql.config';
 import { CommonModule } from './modules/common/common.module';
+import configuration from './config/env/index';
+
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: process.env.NODE_ENV === 'production' ? '.env.prod' : '.env',
-      load: [databaseConfig, redisConfig],
+      load: [configuration, databaseConfig, redisConfig],
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -32,6 +33,6 @@ import { CommonModule } from './modules/common/common.module';
     TagModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [],
 })
 export class AppModule {}
