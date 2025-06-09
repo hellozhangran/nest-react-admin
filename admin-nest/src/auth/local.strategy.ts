@@ -32,7 +32,6 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
       .where('user.name = :name', { name })
       .getOne();
 
-    const user1 = await this.userRepository.findOne({ where: { name } });
       
     if (!user) {
       throw new UnauthorizedException('用户名不正确');

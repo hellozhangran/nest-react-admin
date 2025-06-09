@@ -30,6 +30,8 @@
     "@nestjs/typeorm": "^11.0.0",
     "@songkeys/nestjs-redis": "^10.0.0",
     "bcryptjs": "^3.0.2",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.2",
     "ioredis": "^5.6.1",
     "js-yaml": "^4.1.0",
     "mysql2": "^3.14.1",

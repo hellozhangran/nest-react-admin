@@ -9,9 +9,9 @@ import { CategoryModule } from './blog/category/category.module';
 import { TagModule } from './blog/tag/tag.module';
 import redisConfig from './config/redis.config';
 import databaseConfig from './config/mysql.config';
-import { CommonModule } from './modules/common/common.module';
 import configuration from './config/env/index';
-
+import { CommonModule } from './modules/common/common.module';
+import { SystemModule } from './modules/system/system.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -26,11 +26,7 @@ import configuration from './config/env/index';
         configService.get('mysql')!,
     }),
     CommonModule,
-    UserModule,
-    AuthModule,
-    PostModule,
-    CategoryModule,
-    TagModule,
+    SystemModule
   ],
   controllers: [AppController],
   providers: [],

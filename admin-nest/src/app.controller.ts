@@ -12,7 +12,7 @@ export class AppController {
   getHello(): string {
     const config = this.configService.get('perm');
     console.log(config);
-    return 'Hello World!';
+    return 'Hello World!' + config.router.whitelist[0].path;
   }
   // set 一个redis key
   @Post('redis/set')
@@ -41,3 +41,4 @@ export class AppController {
     return await this.redisService.keys();
   }
 }
+
