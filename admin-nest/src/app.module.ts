@@ -1,12 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { UserModule } from './user/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthModule } from './auth/auth.module';
-import { PostModule } from './blog/post/post.module';
-import { CategoryModule } from './blog/category/category.module';
-import { TagModule } from './blog/tag/tag.module';
 import redisConfig from './config/redis.config';
 import databaseConfig from './config/mysql.config';
 import configuration from './config/env/index';

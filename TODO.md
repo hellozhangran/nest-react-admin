@@ -1,3 +1,10 @@
+# 6.9
+1. 把role menu dept post 模块创建好
+2. 把user模块相关的核心功能接口实现
+
+
+
+
 - captchaImage 获取验证码
 - login 登陆
 
