@@ -7,20 +7,52 @@ import { CreateUserDto, UpdateUserDto, ListUserDto, ChangeStatusDto, ResetPwdDto
 import { UserEntity } from './entities/sys-user.entity';
 import { SysUserWithPostEntity } from './entities/user-with-post.entity';
 import { SysUserWithRoleEntity } from './entities/user-with-role.entity';
+import * as bcrypt from 'bcryptjs';
 
 import { UserDto } from './user.decorator';
+import { SYS_USER_TYPE } from 'src/common/constant';
 
 
 @Injectable()
 export class UserService {
   constructor(
     private readonly jwtService: JwtService,
+    @InjectRepository(UserEntity)
+    private readonly userRepo: Repository<UserEntity>,
+    @InjectRepository(SysUserWithPostEntity)
+    private readonly sysUserWithPostEntityRep: Repository<SysUserWithPostEntity>,
+    @InjectRepository(SysUserWithRoleEntity)
+    private readonly sysUserWithRoleEntityRep: Repository<SysUserWithRoleEntity>,
   ) {}
   /**
    * 后台创建用户
    */
   async create(createUserDto: CreateUserDto) {
+    const salt = bcrypt.genSaltSync(10);
+    if (createUserDto.password) {
+      createUserDto.password = await bcrypt.hashSync(createUserDto.password, salt);
+    }
 
+    const res = await this.userRepo.save({ ...createUserDto, userType: SYS_USER_TYPE.CUSTOM });
+    const postEntity = this.sysUserWithPostEntityRep.createQueryBuilder('postEntity');
+    const postValues = createUserDto.postIds?.map((id) => {
+      return {
+        userId: res.userId,
+        postId: id,
+      };
+    }) || [];
+    postEntity.insert().values(postValues).execute();
+
+    const roleEntity = this.sysUserWithRoleEntityRep.createQueryBuilder('roleEntity');
+    const roleValues = createUserDto.roleIds?.map((id) => {
+      return {
+        userId: res.userId,
+        roleId: id,
+      };
+    }) || [];
+    roleEntity.insert().values(roleValues).execute();
+
+    return res;
   }
 
   /**
