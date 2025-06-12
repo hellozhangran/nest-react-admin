@@ -11,6 +11,7 @@ import * as bcrypt from 'bcryptjs';
 
 import { UserDto } from './user.decorator';
 import { SYS_USER_TYPE } from 'src/common/constant';
+import { UserType } from './dto/user.dto';
 
 
 @Injectable()
@@ -51,50 +52,44 @@ export class UserService {
       };
     }) || [];
     roleEntity.insert().values(roleValues).execute();
-
     return res;
   }
 
   /**
    * 用户列表
    */
-  async findAll(query: ListUserDto, user: UserDto['user']) {
-   
-  }
+  async findAll(query: ListUserDto, user?: UserType['user']) {
+    const entity = this.userRepo.createQueryBuilder('user');
+    entity.where('user.delFlag = :delFlag', { delFlag: '0' });
 
-  /**
-   * 更新用户
-   */
-  async update(updateUserDto: UpdateUserDto, userId: number) {
-    
-  }
 
-  /**
-   * 从数据声明生成令牌
-   */
-  createToken(payload: { uuid: string; userId: number }): string {
-    const accessToken = this.jwtService.sign(payload);
-    return accessToken;
-  }
-
-  /**
-   * 从令牌中获取数据声明
-   */
-  parseToken(token: string) {
-    try {
-      if (!token) return null;
-      const payload = this.jwtService.verify(token.replace('Bearer ', ''));
-      return payload;
-    } catch (error) {
-      return null;
+    if (query.userName) {
+      entity.andWhere(`user.userName LIKE "%${query.userName}%"`);
     }
-  }
 
-  /**
-   * 修改用户状态
-   */
-  async changeStatus(changeStatusDto: ChangeStatusDto) {
+    if (query.phonenumber) {
+      entity.andWhere(`user.phonenumber LIKE "%${query.phonenumber}%"`);
+    }
 
+    if (query.status) {
+      entity.andWhere('user.status = :status', { status: query.status });
+    }
+
+    if (query.params?.beginTime && query.params?.endTime) {
+      entity.andWhere('user.createTime BETWEEN :start AND :end', { start: query.params.beginTime, end: query.params.endTime });
+    }
+
+    if (query.pageSize && query.pageNum) {
+      entity.skip(query.pageSize * (query.pageNum - 1)).take(query.pageSize);
+    }
+    
+
+    const [list, total] = await entity.getManyAndCount();
+
+    return {
+      list,
+      total,
+    };
   }
 
   /**
@@ -107,11 +102,9 @@ export class UserService {
   /**
    * 个人中心-用户信息
    */
-  async updateProfile(user: UserDto, updateProfileDto: UpdateProfileDto) {}
-
-  /**
-   * 个人中心-修改密码
-   */
-  async updatePwd(user: UserDto, updatePwdDto: UpdatePwdDto) {}
+  async updateProfile(user: UserType, updateProfileDto: UpdateProfileDto) {
+    await this.userRepo.update({ userId: 1 }, updateProfileDto);
+    return "ok";
+  }
 
 }

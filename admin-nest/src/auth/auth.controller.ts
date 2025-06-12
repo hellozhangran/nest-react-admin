@@ -15,5 +15,5 @@ export class AuthController {
     // AuthGuard('local') 守卫处理时把user注入到req中
     return this.authService.createToken(req.user);
   }
-
+  
 }
