@@ -1,16 +1,10 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { BaseEntity } from 'src/common/entities/base';
-class NewBaseEntity extends BaseEntity {
-  constructor() {
-    super();
-    delete (this as any).delFlag;
-  }
-}
 
 @Entity('sys_menu', {
   comment: '菜单权限表',
 })
-export class SysMenuEntity extends NewBaseEntity {
+export class SysMenuEntity extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'int', name: 'menu_id', comment: '菜单ID' })
   public menuId: number;
 
