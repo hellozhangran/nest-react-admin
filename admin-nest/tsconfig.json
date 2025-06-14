@@ -6,6 +6,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "target": "ES2023",
     "sourceMap": true,
     "outDir": "./dist",
@@ -16,6 +17,19 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false,
     "strictBindCallApply": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@/*": ["src/*"],
+      "@modules/*": ["src/modules/*"],
+      "@common/*": ["src/common/*"],
+      "@entities/*": ["src/common/entities/*"],
+      "@dto/*": ["src/common/dto/*"],
+      "@filters/*": ["src/common/filters/*"],
+      "@interceptors/*": ["src/common/interceptors/*"],
+      "@guards/*": ["src/common/guards/*"],
+      "@decorators/*": ["src/common/decorators/*"],
+      "@utils/*": ["src/common/utils/*"],
+      "@config/*": ["src/config/*"]
+    }
   }
 }

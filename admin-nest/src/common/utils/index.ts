@@ -5,11 +5,41 @@ import isLeapYear from 'dayjs/plugin/isLeapYear'; // 导入插件
 import timezone from 'dayjs/plugin/timezone'; // 导入插件
 import utc from 'dayjs/plugin/utc'; // 导入插件
 import 'dayjs/locale/zh-cn'; // 导入本地化语言
-dayjs?.extend(utc);
-dayjs?.extend(timezone);
-dayjs?.extend(isLeapYear); // 使用插件
-dayjs?.locale('zh-cn'); // 使用本地化语言
-dayjs?.tz.setDefault('Asia/Beijing');
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.tz.setDefault('Asia/Beijing'); // tz(timezone) 设置 默认时区为东八区
+dayjs.extend(isLeapYear); // 是否是闰年插件 dayjs('2000-01-01').isLeapYear() 返回true
+dayjs.locale('zh-cn'); // 使用本地化语言
+
+
+/**
+ * UTC 时间工具函数
+ * 用于数据库存储、API 内部计算
+ * @param time 可选，指定时间，默认当前时间
+ * @param format 可选，输出格式，默认 ISO 格式
+ * @returns UTC 时间字符串
+ */
+export function useUTCTime(time?: string | Date, format?: string): string {
+  const utcTime = time ? dayjs(time).utc() : dayjs().utc();
+  return format ? utcTime.format(format) : utcTime.toISOString();
+}
+
+/**
+ * 北京时间工具函数
+ * 用于用户界面显示、本地化处理
+ * @param time 可选，指定时间（可以是UTC时间），默认当前时间
+ * @param format 可选，输出格式，默认 'YYYY-MM-DD HH:mm:ss'
+ * @returns 北京时间字符串
+ */
+export function useBeijingTime(time?: string | Date, format: string = 'YYYY-MM-DD HH:mm:ss'): string {
+  if (time) {
+    // 如果传入的是UTC时间，先转换
+    return dayjs.utc(time).tz('Asia/Beijing').format(format);
+  } else {
+    // 当前北京时间
+    return dayjs().tz('Asia/Beijing').format(format);
+  }
+}
 
 /**
  * 数组转树结构

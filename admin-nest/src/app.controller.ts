@@ -10,7 +10,7 @@ export class AppController {
 
   @Get('hello')
   getHello(): string {
-    const config = this.configService.get('perm');
+    const config = this.configService.get('permission');
     console.log(config);
     return 'Hello World!' + config.router.whitelist[0].path;
   }

@@ -1,4 +1,4 @@
-import { IsString, IsEnum, IsArray, Length, IsOptional, IsNumber, IsNumberString, IsEmail } from 'class-validator';
+import { IsString, IsEnum, IsArray, Length, IsOptional, IsNumber, IsNumberString, IsEmail, MinLength, MaxLength } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 import { PagingDto } from 'src/common/dto/index';
 
@@ -166,3 +166,23 @@ export enum StatusEnum {
     newPassword: string;
   }
   
+
+  export class LoginDto {
+    @IsOptional()
+    @IsString()
+    code?: string;
+    
+    @IsString()
+    @MinLength(2)
+    @MaxLength(10)
+    userName: string;
+  
+    @IsString()
+    @MinLength(5)
+    @MaxLength(20)
+    password: string;
+    
+    @IsOptional()
+    @IsString()
+    uuid?: string;
+  }

@@ -1,13 +1,10 @@
 # 权限相关
-perm:
+permission:
   router:
     whitelist:
       [
-        { path: '/captchaImage', method: 'GET' },
-        { path: '/registerUser', method: 'GET' },
-        { path: '/register', method: 'POST' },
-        { path: '/login', method: 'POST' },
-        { path: '/logout', method: 'POST' },
-        { path: '/perm/{id}', method: 'GET' },
-        { path: '/upload', method: 'POST' },
+        { path: '/api/system/user/captchaImage', method: 'GET' },
+        { path: '/api/system/user/register', method: 'POST' },
+        { path: '/api/system/user/login', method: 'POST' },
+        { path: '/api/system/user/logout', method: 'POST' },
       ]

@@ -7,6 +7,8 @@ import databaseConfig from './config/mysql.config';
 import configuration from './config/env/index';
 import { CommonModule } from './modules/common/common.module';
 import { SystemModule } from './modules/system/system.module';
+import { JwtAuthGuard } from './common/guards/auth.guard';
+import { APP_GUARD } from '@nestjs/core';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -24,6 +26,11 @@ import { SystemModule } from './modules/system/system.module';
     SystemModule
   ],
   controllers: [AppController],
-  providers: [],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+  ],
 })
 export class AppModule {}
