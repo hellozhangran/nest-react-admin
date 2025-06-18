@@ -5,11 +5,16 @@
     "prepare": "lefthook install"
   },
   "devDependencies": {
-    "lefthook": "^1.8.2"
+    "lefthook": "^1.8.2",
+    "@commitlint/cli": "^17.8.1",
+		"@commitlint/config-conventional": "^17.8.1"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
       "lefthook"
     ]
+  },
+  "commitlint": {
+    "extends": ["@commitlint/config-conventional"]
   }
 }

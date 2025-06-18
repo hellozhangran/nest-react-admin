@@ -7,6 +7,6 @@ pre-commit:
     
 commit-msg:
   commands:
-    admin-react-commit-msg:
-      glob: "admin-react/**/*"
-      run: cd admin-react && pnpm commitlint --edit "$1"
+    lint-commit-msg:
+      run: pnpm dlx commitlint --edit "$1"
+      skip: [merge, rebase]

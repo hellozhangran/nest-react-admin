@@ -101,8 +101,6 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
-		"@commitlint/cli": "^17.8.1",
-		"@commitlint/config-conventional": "^17.8.1",
 		"@faker-js/faker": "^8.4.1",
 		"@types/autosuggest-highlight": "^3.2.3",
 		"@types/color": "^3.0.6",
