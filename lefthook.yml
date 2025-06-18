@@ -1,0 +1,11 @@
+pre-commit:
+  commands:
+    admin-react-hooks:
+      glob: "admin-react/**/*"
+      run: cd admin-react && npx lefthook run pre-commit
+    
+commit-msg:
+  commands:
+    admin-react-hooks:
+      glob: "admin-react/**/*"  
+      run: cd admin-react && npx lefthook run commit-msg {1}

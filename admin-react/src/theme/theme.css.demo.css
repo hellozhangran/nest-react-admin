@@ -1,0 +1,286 @@
+/* 亮色主题 */
+:root[data-theme-mode="light"] {
+  /* 颜色变量 */
+  --colors-palette-primary-lighter: #C8FAD6;
+  --colors-palette-primary-lighterChannel: 200 250 214;
+  --colors-palette-primary-light: #5BE49B;
+  --colors-palette-primary-lightChannel: 91 228 155;
+  --colors-palette-primary-default: #00A76F;
+  --colors-palette-primary-defaultChannel: 0 167 111;
+  --colors-palette-primary-dark: #007867;
+  --colors-palette-primary-darkChannel: 0 120 103;
+  --colors-palette-primary-darker: #004B50;
+  --colors-palette-primary-darkerChannel: 0 75 80;
+
+  --colors-palette-success-lighter: #D8FBDE;
+  --colors-palette-success-lighterChannel: 216 251 222;
+  --colors-palette-success-light: #86E8AB;
+  --colors-palette-success-lightChannel: 134 232 171;
+  --colors-palette-success-default: #36B37E;
+  --colors-palette-success-defaultChannel: 54 179 126;
+  /* ... 更多 success/warning/error/info 颜色 */
+
+  --colors-palette-gray-100: #F9FAFB;
+  --colors-palette-gray-100Channel: 249 250 251;
+  --colors-palette-gray-200: #F4F6F8;
+  --colors-palette-gray-200Channel: 244 246 248;
+  /* ... 更多灰色层级 */
+
+  --colors-common-white: #FFFFFF;
+  --colors-common-whiteChannel: 255 255 255;
+  --colors-common-black: #09090B;
+  --colors-common-blackChannel: 9 9 11;
+
+  --colors-action-hover: rgba(145, 158, 171, 0.1);
+  --colors-action-hoverChannel: 145 158 171;
+  --colors-action-selected: rgba(145, 158, 171, 0.1);
+  --colors-action-selectedChannel: 145 158 171;
+  /* ... 更多交互状态颜色 */
+
+  --colors-text-primary: #1C252E;
+  --colors-text-primaryChannel: 28 37 46;
+  --colors-text-secondary: #637381;
+  --colors-text-secondaryChannel: 99 115 129;
+  --colors-text-disabled: #919EAB;
+  --colors-text-disabledChannel: 145 158 171;
+
+  --colors-background-default: #FFFFFF;
+  --colors-background-defaultChannel: 255 255 255;
+  --colors-background-paper: #FFFFFF;
+  --colors-background-paperChannel: 255 255 255;
+  --colors-background-neutral: #F4F6F8;
+  --colors-background-neutralChannel: 244 246 248;
+
+  /* 字体变量 */
+  --typography-fontFamily-openSans: "Open Sans Variable";
+  --typography-fontFamily-inter: "Inter Variable";
+  --typography-fontSize-xs: 12;
+  --typography-fontSize-sm: 14;
+  --typography-fontSize-default: 16;
+  --typography-fontSize-lg: 18;
+  --typography-fontSize-xl: 20;
+  --typography-fontWeight-light: 300;
+  --typography-fontWeight-normal: 400;
+  --typography-fontWeight-medium: 500;
+  --typography-fontWeight-semibold: 600;
+  --typography-fontWeight-bold: 700;
+  --typography-lineHeight-none: 1;
+  --typography-lineHeight-tight: 1.25;
+  --typography-lineHeight-normal: 1.375;
+  --typography-lineHeight-relaxed: 1.5;
+
+  /* 阴影变量（亮色版本） */
+  --shadows-none: none;
+  --shadows-sm: 0 1px 2px 0 rgba(145, 158, 171, 0.16);
+  --shadows-default: 0 4px 8px 0 rgba(145, 158, 171, 0.16);
+  --shadows-md: 0 8px 16px 0 rgba(145, 158, 171, 0.16);
+  --shadows-lg: 0 12px 24px 0 rgba(145, 158, 171, 0.16);
+  --shadows-xl: 0 16px 32px 0 rgba(145, 158, 171, 0.16);
+  --shadows-2xl: 0 20px 40px 0 rgba(145, 158, 171, 0.16);
+  --shadows-3xl: 0 24px 48px 0 rgba(145, 158, 171, 0.16);
+  --shadows-inner: inset 0 2px 4px 0 rgba(145, 158, 171, 0.16);
+  --shadows-dialog: -40px 40px 80px -8px rgba(9, 9, 11, 0.24);
+  --shadows-card: 0 0 2px 0 rgba(145, 158, 171, 0.2), 0 12px 24px -4px rgba(145, 158, 171, 0.12);
+  --shadows-dropdown: 0 0 2px 0 rgba(145, 158, 171, 0.24), -20px 20px 40px -4px rgba(145, 158, 171, 0.24);
+  --shadows-primary: 0 8px 16px 0 rgba(0, 167, 111, 0.24);
+  --shadows-info: 0 8px 16px 0 rgba(0, 184, 217, 0.24);
+  --shadows-success: 0 8px 16px 0 rgba(54, 179, 126, 0.24);
+  --shadows-warning: 0 8px 16px 0 rgba(255, 171, 0, 0.24);
+  --shadows-error: 0 8px 16px 0 rgba(255, 86, 48, 0.24);
+
+  /* 基础变量 */
+  --spacing-0: 0px;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-7: 28px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+  --spacing-20: 80px;
+  --spacing-24: 96px;
+  --spacing-32: 128px;
+
+  --borderRadius-none: 0px;
+  --borderRadius-sm: 2px;
+  --borderRadius-default: 4px;
+  --borderRadius-md: 6px;
+  --borderRadius-lg: 8px;
+  --borderRadius-xl: 12px;
+  --borderRadius-full: 9999px;
+
+  --screens-xs: 375px;
+  --screens-sm: 576px;
+  --screens-md: 768px;
+  --screens-lg: 1024px;
+  --screens-xl: 1280px;
+  --screens-2xl: 1536px;
+
+  --opacity-0: 0%;
+  --opacity-5: 5%;
+  --opacity-10: 10%;
+  --opacity-20: 20%;
+  --opacity-25: 25%;
+  --opacity-30: 30%;
+  --opacity-35: 35%;
+  --opacity-40: 40%;
+  --opacity-45: 45%;
+  --opacity-50: 50%;
+  --opacity-55: 55%;
+  --opacity-60: 60%;
+  --opacity-65: 65%;
+  --opacity-70: 70%;
+  --opacity-75: 75%;
+  --opacity-80: 80%;
+  --opacity-85: 85%;
+  --opacity-90: 90%;
+  --opacity-95: 95%;
+  --opacity-100: 100%;
+  --opacity-border: 20%;
+  --opacity-hover: 8%;
+  --opacity-selected: 16%;
+  --opacity-focus: 24%;
+  --opacity-disabled: 80%;
+  --opacity-disabledBackground: 24%;
+
+  --zIndex-appBar: 10;
+  --zIndex-drawer: 50;
+  --zIndex-modal: 50;
+  --zIndex-snackbar: 50;
+  --zIndex-tooltip: 50;
+}
+
+/* 暗色主题 */
+:root[data-theme-mode="dark"] {
+  /* 颜色变量（暗色版本 - 主要是文字和背景颜色不同） */
+  --colors-palette-primary-lighter: #C8FAD6;
+  /* 主色调保持一致 */
+  --colors-palette-primary-lighterChannel: 200 250 214;
+  --colors-palette-primary-light: #5BE49B;
+  --colors-palette-primary-lightChannel: 91 228 155;
+  --colors-palette-primary-default: #00A76F;
+  --colors-palette-primary-defaultChannel: 0 167 111;
+  --colors-palette-primary-dark: #007867;
+  --colors-palette-primary-darkChannel: 0 120 103;
+  --colors-palette-primary-darker: #004B50;
+  --colors-palette-primary-darkerChannel: 0 75 80;
+
+  /* ... success/warning/error/info 颜色保持一致 */
+
+  /* 文字颜色（暗色主题下不同） */
+  --colors-text-primary: #FFFFFF;
+  /* 亮色主题下是黑色，暗色主题下是白色 */
+  --colors-text-primaryChannel: 255 255 255;
+  --colors-text-secondary: #919EAB;
+  --colors-text-secondaryChannel: 145 158 171;
+  --colors-text-disabled: #637381;
+  --colors-text-disabledChannel: 99 115 129;
+
+  /* 背景颜色（暗色主题下不同） */
+  --colors-background-default: #09090B;
+  /* 亮色主题下是白色，暗色主题下是黑色 */
+  --colors-background-defaultChannel: 9 9 11;
+  --colors-background-paper: #09090B;
+  --colors-background-paperChannel: 9 9 11;
+  --colors-background-neutral: #27272A;
+  --colors-background-neutralChannel: 39 39 42;
+
+  /* 阴影变量（暗色版本 - 使用黑色阴影） */
+  --shadows-sm: 0 1px 2px 0 rgba(9, 9, 11, 0.16);
+  --shadows-default: 0 4px 8px 0 rgba(9, 9, 11, 0.16);
+  --shadows-md: 0 8px 16px 0 rgba(9, 9, 11, 0.16);
+  /* ... 其他阴影都使用黑色 */
+
+  /* 字体、间距、圆角、透明度、层级等保持一致 */
+  --typography-fontFamily-openSans: "Open Sans Variable";
+  --typography-fontFamily-inter: "Inter Variable";
+  /* ... 其他变量与亮色主题相同 */
+}
+
+/* 默认绿色预设 */
+:root[data-color-palette="default"] {
+  --colors-palette-primary-lighter: #C8FAD6;
+  --colors-palette-primary-lighterChannel: 200 250 214;
+  --colors-palette-primary-light: #5BE49B;
+  --colors-palette-primary-lightChannel: 91 228 155;
+  --colors-palette-primary-default: #00A76F;
+  --colors-palette-primary-defaultChannel: 0 167 111;
+  --colors-palette-primary-dark: #007867;
+  --colors-palette-primary-darkChannel: 0 120 103;
+  --colors-palette-primary-darker: #004B50;
+  --colors-palette-primary-darkerChannel: 0 75 80;
+}
+
+/* 青色预设 */
+:root[data-color-palette="cyan"] {
+  --colors-palette-primary-lighter: #CCF4FE;
+  --colors-palette-primary-lighterChannel: 204 244 254;
+  --colors-palette-primary-light: #68CDF9;
+  --colors-palette-primary-lightChannel: 104 205 249;
+  --colors-palette-primary-default: #078DEE;
+  --colors-palette-primary-defaultChannel: 7 141 238;
+  --colors-palette-primary-dark: #0351AB;
+  --colors-palette-primary-darkChannel: 3 81 171;
+  --colors-palette-primary-darker: #012972;
+  --colors-palette-primary-darkerChannel: 1 41 114;
+}
+
+/* 紫色预设 */
+:root[data-color-palette="purple"] {
+  --colors-palette-primary-lighter: #EBD6FD;
+  --colors-palette-primary-lighterChannel: 235 214 253;
+  --colors-palette-primary-light: #B985F4;
+  --colors-palette-primary-lightChannel: 185 133 244;
+  --colors-palette-primary-default: #7635DC;
+  --colors-palette-primary-defaultChannel: 118 53 220;
+  --colors-palette-primary-dark: #431A9E;
+  --colors-palette-primary-darkChannel: 67 26 158;
+  --colors-palette-primary-darker: #200A69;
+  --colors-palette-primary-darkerChannel: 32 10 105;
+}
+
+/* 蓝色预设 */
+:root[data-color-palette="blue"] {
+  --colors-palette-primary-lighter: #D1E9FC;
+  --colors-palette-primary-lighterChannel: 209 233 252;
+  --colors-palette-primary-light: #76B0F1;
+  --colors-palette-primary-lightChannel: 118 176 241;
+  --colors-palette-primary-default: #2065D1;
+  --colors-palette-primary-defaultChannel: 32 101 209;
+  --colors-palette-primary-dark: #103996;
+  --colors-palette-primary-darkChannel: 16 57 150;
+  --colors-palette-primary-darker: #061B64;
+  --colors-palette-primary-darkerChannel: 6 27 100;
+}
+
+/* 橙色预设 */
+:root[data-color-palette="orange"] {
+  --colors-palette-primary-lighter: #FEF4D4;
+  --colors-palette-primary-lighterChannel: 254 244 212;
+  --colors-palette-primary-light: #FED680;
+  --colors-palette-primary-lightChannel: 254 214 128;
+  --colors-palette-primary-default: #FDA92D;
+  --colors-palette-primary-defaultChannel: 253 169 45;
+  --colors-palette-primary-dark: #B66816;
+  --colors-palette-primary-darkChannel: 182 104 22;
+  --colors-palette-primary-darker: #793908;
+  --colors-palette-primary-darkerChannel: 121 57 8;
+}
+
+/* 红色预设 */
+:root[data-color-palette="red"] {
+  --colors-palette-primary-lighter: #FFE3D5;
+  --colors-palette-primary-lighterChannel: 255 227 213;
+  --colors-palette-primary-light: #FF9882;
+  --colors-palette-primary-lightChannel: 255 152 130;
+  --colors-palette-primary-default: #FF3030;
+  --colors-palette-primary-defaultChannel: 255 48 48;
+  --colors-palette-primary-dark: #B71833;
+  --colors-palette-primary-darkChannel: 183 24 51;
+  --colors-palette-primary-darker: #7A0930;
+  --colors-palette-primary-darkerChannel: 122 9 48;
+}
