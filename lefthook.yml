@@ -1,11 +1,12 @@
 pre-commit:
+  parallel: true 
   commands:
-    admin-react-hooks:
+    admin-react-lint-check:
       glob: "admin-react/**/*"
-      run: cd admin-react && npx lefthook run pre-commit
+      run: cd admin-react && pnpm dlx lefthook run pre-commit
     
 commit-msg:
   commands:
-    admin-react-hooks:
-      glob: "admin-react/**/*"  
-      run: cd admin-react && npx lefthook run commit-msg {1}
+    admin-react-commit-msg:
+      glob: "admin-react/**/*"
+      run: cd admin-react && pnpm commitlint --edit "$1"
