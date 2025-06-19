@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
-import worker from "./_mock";
+// import worker from "./_mock";
 import "./locales/i18n";
 import "./global.css";
 import "./theme/theme.css";
@@ -32,4 +32,4 @@ root.render(
 
 // TODO：MSW 的 mock 是通过监听全部的请求达成的，不仅监听了xhr请求也包括资源文件的请求，这会导致network面板混乱
 // 🥵 start service worker mock in development mode
-worker.start({ onUnhandledRequest: "bypass", quiet: true });
+// worker.start({ onUnhandledRequest: "bypass", quiet: false });

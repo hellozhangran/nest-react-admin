@@ -7,6 +7,15 @@ export interface SignInReq {
 	password: string;
 }
 
+export interface LoginReq {
+	userName: string;
+	password: string;
+}
+
+export interface LoginRes {
+	token: string;
+}
+
 export interface SignUpReq extends SignInReq {
 	email: string;
 }
@@ -18,15 +27,16 @@ export enum UserApi {
 	Logout = "/auth/logout",
 	Refresh = "/auth/refresh",
 	User = "/user",
+	Login = "/system/user/login",
 }
 
-const signin = (data: SignInReq) => apiClient.post<SignInRes>({ url: UserApi.SignIn, data });
 const signup = (data: SignUpReq) => apiClient.post<SignInRes>({ url: UserApi.SignUp, data });
 const logout = () => apiClient.get({ url: UserApi.Logout });
 const findById = (id: string) => apiClient.get<UserInfo[]>({ url: `${UserApi.User}/${id}` });
+const login = (data: LoginReq) => apiClient.post<LoginRes>({ url: UserApi.Login, data });
 
 export default {
-	signin,
+	login,
 	signup,
 	findById,
 	logout,

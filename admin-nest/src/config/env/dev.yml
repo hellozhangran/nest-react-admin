@@ -3,6 +3,7 @@ permission:
   router:
     whitelist:
       [
+        { path: '/api/hello', method: 'GET' },
         { path: '/api/system/user/captchaImage', method: 'GET' },
         { path: '/api/system/user/register', method: 'POST' },
         { path: '/api/system/user/login', method: 'POST' },

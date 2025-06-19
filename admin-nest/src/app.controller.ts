@@ -10,9 +10,9 @@ export class AppController {
 
   @Get('hello')
   getHello(): string {
-    const config = this.configService.get('permission');
-    console.log(config);
-    return 'Hello World!' + config.router.whitelist[0].path;
+    const config = this.configService.get('yml.permission');
+    console.log('eeee', config);
+    return 'Hello World! ' + config.router.whitelist[0].path;
   }
   // set 一个redis key
   @Post('redis/set')

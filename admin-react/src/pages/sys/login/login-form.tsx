@@ -1,7 +1,7 @@
 import { DEFAULT_USER } from "@/_mock/assets";
-import type { SignInReq } from "@/api/services/userService";
+import type { LoginReq } from "@/api/services/userService";
 import { Icon } from "@/components/icon";
-import { useSignIn } from "@/store/userStore";
+import { useLogin } from "@/store/userStore";
 import { Button } from "@/ui/button";
 import { Checkbox } from "@/ui/checkbox";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/ui/form";
@@ -19,21 +19,21 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
 	const [remember, setRemember] = useState(true);
 
 	const { loginState, setLoginState } = useLoginStateContext();
-	const signIn = useSignIn();
+	const login = useLogin();
 
-	const form = useForm<SignInReq>({
+	const form = useForm<LoginReq>({
 		defaultValues: {
-			username: DEFAULT_USER.username,
+			userName: DEFAULT_USER.username,
 			password: DEFAULT_USER.password,
 		},
 	});
 
 	if (loginState !== LoginStateEnum.LOGIN) return null;
 
-	const handleFinish = async (values: SignInReq) => {
+	const handleFinish = async (values: LoginReq) => {
 		setLoading(true);
 		try {
-			await signIn(values);
+			await login(values);
 		} finally {
 			setLoading(false);
 		}
@@ -50,7 +50,7 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
 
 					<FormField
 						control={form.control}
-						name="username"
+						name="userName"
 						rules={{ required: t("sys.login.accountPlaceholder") }}
 						render={({ field }) => (
 							<FormItem>
