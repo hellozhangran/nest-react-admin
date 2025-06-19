@@ -26,7 +26,7 @@ export default async function registerLocalIcons() {
 		return;
 	}
 
-	const svgModules = import.meta.glob("../../assets/icons/*.svg", { as: "raw", eager: true });
+	const svgModules = import.meta.glob("../../assets/icons/*.svg", { query: "?raw", import: "default", eager: true });
 	const icons: Record<string, IconifyIcon> = {};
 
 	for (const [path, svgContent] of Object.entries(svgModules)) {

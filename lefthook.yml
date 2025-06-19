@@ -1,12 +1,25 @@
+skip_output:
+  - meta
+  - success
+  - summary
+
 pre-commit:
-  parallel: true 
+  parallel: true
   commands:
-    admin-react-lint-check:
-      glob: "admin-react/**/*"
-      run: cd admin-react && pnpm dlx lefthook run pre-commit
-    
+    format:
+      glob: "admin-react/**/*.{js,jsx,ts,tsx,json,md}"
+      run: cd admin-react && pnpm biome format --write --no-errors-on-unmatched $(echo {staged_files} | sed 's#admin-react/##g')
+      stage_fixed: true
+    lint:
+      glob: "admin-react/**/*.{js,jsx,ts,tsx}"
+      run: cd admin-react && pnpm biome lint --no-errors-on-unmatched $(echo {staged_files} | sed 's#admin-react/##g')
+    check-types:
+      glob: "admin-react/**/*.{ts,tsx}"
+      run: cd admin-react && pnpm tsc --noEmit
+
+
 commit-msg:
   commands:
     lint-commit-msg:
-      run: pnpm dlx commitlint --edit "$1"
+      run: pnpm commitlint --edit "$1"
       skip: [merge, rebase]

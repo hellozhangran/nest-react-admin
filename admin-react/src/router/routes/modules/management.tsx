@@ -34,7 +34,7 @@ const management: AppRouteObject = {
 		},
 		{
 			path: "user",
-			meta: { label: "sys.menu.user.index", key: "/management/user" },
+			meta: { label: "sys.menu.user.index", key: "/management/user", hideMenu: true },
 			children: [
 				{
 					index: true,
