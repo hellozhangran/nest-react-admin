@@ -1,6 +1,6 @@
 import { Controller, Post, Body, Get, Query, Param } from '@nestjs/common';
 import { MenuService } from './menu.service';
-import { CreateMenuDto, UpdateMenuDto, ListDeptDto } from './dto/index';
+import { CreateMenuDto, UpdateMenuDto, ListMenuDto } from './dto/index';
 
 @Controller('system/menu')
 export class MenuController {
@@ -22,7 +22,7 @@ export class MenuController {
    * @returns 
    */
   @Get('list')
-  findAll(@Query() query: ListDeptDto) {
+  findAll(@Query() query: ListMenuDto) {
     return this.menuService.findAll(query);
   }
 

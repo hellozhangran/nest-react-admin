@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { SysMenuEntity } from "./entities/menu.entity";
-import { CreateMenuDto, ListDeptDto, UpdateMenuDto } from "./dto";
+import { CreateMenuDto, ListMenuDto, UpdateMenuDto } from "./dto";
 import { ListToTree } from "src/common/utils";
 
 @Injectable()
@@ -27,7 +27,7 @@ export class MenuService {
    * @param query 
    * @returns 
    */
-  async findAll(query: ListDeptDto) {
+  async findAll(query: ListMenuDto) {
     const entity = this.sysMenuEntityRep.createQueryBuilder('entity');
     entity.where('entity.delFlag = :delFlag', { delFlag: '0' });
 

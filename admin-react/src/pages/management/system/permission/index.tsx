@@ -27,6 +27,8 @@ export default function PermissionPage() {
 	const permissions = useUserPermission();
 	const { t } = useTranslation();
 
+	console.log("ests------: ", permissions);
+
 	const [permissionModalProps, setPermissionModalProps] = useState<PermissionModalProps>({
 		formValue: { ...defaultPermissionValue },
 		title: "New",

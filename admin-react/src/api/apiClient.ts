@@ -1,7 +1,7 @@
 import axios, { type AxiosRequestConfig, type AxiosError, type AxiosResponse } from "axios";
 
 import { t } from "@/locales/i18n";
-import userStore from "@/store/userStore";
+import { useUserActions, useUserToken } from "@/store/userStore";
 
 import { toast } from "sonner";
 import type { Result } from "#/api";
@@ -18,7 +18,10 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
 	(config) => {
 		// 在请求被发送之前做些什么
-		config.headers.Authorization = "Bearer Token";
+		const { accessToken } = useUserToken();
+		if (accessToken) {
+			config.headers.Authorization = `Bearer ${accessToken}`;
+		}
 		return config;
 	},
 	(error) => {
@@ -31,8 +34,6 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
 	(res: AxiosResponse<Result>) => {
 		if (!res.data) throw new Error(t("sys.api.apiRequestFailed"));
-
-		console.log("121212", res.data);
 
 		const { code, data, message } = res.data;
 		// 业务请求成功
@@ -54,7 +55,7 @@ axiosInstance.interceptors.response.use(
 
 		const status = response?.status;
 		if (status === 401) {
-			userStore.getState().actions.clearUserInfoAndToken();
+			useUserActions().clearUserInfoAndToken();
 		}
 		return Promise.reject(error);
 	},

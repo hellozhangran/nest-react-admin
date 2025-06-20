@@ -1,11 +1,8 @@
 import apiClient from "../apiClient";
 
 import type { UserInfo, UserToken } from "#/entity";
-
-export interface SignInReq {
-	username: string;
-	password: string;
-}
+import type { Pagination } from "@/types/page";
+import type { UserEntity } from "@/types/entity/index";
 
 export interface LoginReq {
 	userName: string;
@@ -16,10 +13,32 @@ export interface LoginRes {
 	token: string;
 }
 
-export interface SignUpReq extends SignInReq {
+export interface SignUpReq extends LoginReq {
 	email: string;
 }
+
 export type SignInRes = UserToken & { user: UserInfo };
+
+export interface ProfileRes {
+	user: UserInfo;
+}
+
+export interface UpdateProfileReq {
+	nickName: string;
+	email: string;
+	phonenumber: string;
+	sex: string;
+	avatar?: string;
+}
+
+export interface ListUserReq extends Pagination {
+	deptId?: string;
+	nickName?: string;
+	email?: string;
+	userName?: string;
+	phonenumber?: string;
+	status?: string;
+}
 
 export enum UserApi {
 	SignIn = "/auth/signin",
@@ -28,16 +47,24 @@ export enum UserApi {
 	Refresh = "/auth/refresh",
 	User = "/user",
 	Login = "/system/user/login",
+	Profile = "/system/user/profile",
+	UserList = "/system/user/list",
 }
 
 const signup = (data: SignUpReq) => apiClient.post<SignInRes>({ url: UserApi.SignUp, data });
 const logout = () => apiClient.get({ url: UserApi.Logout });
 const findById = (id: string) => apiClient.get<UserInfo[]>({ url: `${UserApi.User}/${id}` });
 const login = (data: LoginReq) => apiClient.post<LoginRes>({ url: UserApi.Login, data });
+const getProfile = () => apiClient.get<ProfileRes>({ url: UserApi.Profile });
+const putProfile = (data: UpdateProfileReq) => apiClient.put<string>({ url: UserApi.Profile, data });
+const getUserList = (params: ListUserReq) => apiClient.get<UserEntity[]>({ url: UserApi.UserList, params });
 
 export default {
 	login,
 	signup,
 	findById,
 	logout,
+	getProfile,
+	putProfile,
+	getUserList,
 };
