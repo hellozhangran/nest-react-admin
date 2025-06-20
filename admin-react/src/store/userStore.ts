@@ -58,14 +58,13 @@ export const useLogin = () => {
 	const navigatge = useNavigate();
 	const { setUserToken, setUserInfo } = useUserActions();
 
-	const signInMutation = useMutation({
+	const loginMutation = useMutation({
 		mutationFn: userService.login,
 	});
 
 	const login = async (data: LoginReq) => {
 		try {
-			const res = await signInMutation.mutateAsync(data);
-			console.info("ressss-----", res);
+			const res = await loginMutation.mutateAsync(data);
 			const { token } = res;
 			setUserToken({ accessToken: token, refreshToken: "" });
 			setUserInfo({} as any);
@@ -74,7 +73,6 @@ export const useLogin = () => {
 				closeButton: true,
 			});
 		} catch (err) {
-			console.log("111111", err);
 			toast.error(err.message, {
 				position: "top-center",
 			});

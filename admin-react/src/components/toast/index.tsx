@@ -65,6 +65,8 @@ export default function Toast() {
 	);
 }
 
+styled.div``;
+
 const ToasterStyleWrapper = styled.div`
   [data-sonner-toast] {
     font-weight: 600;
