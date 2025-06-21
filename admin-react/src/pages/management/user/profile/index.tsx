@@ -4,7 +4,6 @@ import { useUserInfo } from "@/store/userStore";
 import { themeVars } from "@/theme/theme.css";
 import { Card } from "@/ui/card";
 import { type CSSProperties, useState } from "react";
-import ConnectionsTab from "./connections-tab";
 import ProfileTab from "./profile-tab";
 import ProjectsTab from "./projects-tab";
 import TeamsTab from "./teams-tab";
@@ -39,11 +38,6 @@ function UserProfile() {
 			icon: <Icon icon="mingcute:profile-fill" size={24} className="mr-2" />,
 			title: "Projects",
 			content: <ProjectsTab />,
-		},
-		{
-			icon: <Icon icon="mingcute:profile-fill" size={24} className="mr-2" />,
-			title: "Connections",
-			content: <ConnectionsTab />,
 		},
 	];
 

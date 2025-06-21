@@ -4,7 +4,6 @@ import { Icon } from "@/components/icon";
 import { useUserInfo } from "@/store/userStore";
 import { themeVars } from "@/theme/theme.css";
 import { Avatar, AvatarImage } from "@/ui/avatar";
-import { Badge } from "@/ui/badge";
 import { Button } from "@/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/ui/card";
 import { Progress } from "@/ui/progress";
@@ -55,77 +54,6 @@ export default function ProfileTab() {
 			icon: <Icon icon="ic:baseline-email" size={18} />,
 			label: "Email",
 			val: username,
-		},
-	];
-
-	const ConnectionsItems = [
-		{
-			avatar: faker.image.avatarGitHub(),
-			name: faker.person.fullName(),
-			connections: `${faker.number.int(100)} Connections`,
-			connected: faker.datatype.boolean(),
-		},
-
-		{
-			avatar: faker.image.avatarGitHub(),
-			name: faker.person.fullName(),
-			connections: `${faker.number.int(100)} Connections`,
-			connected: faker.datatype.boolean(),
-		},
-
-		{
-			avatar: faker.image.avatarGitHub(),
-			name: faker.person.fullName(),
-			connections: `${faker.number.int(100)} Connections`,
-			connected: faker.datatype.boolean(),
-		},
-
-		{
-			avatar: faker.image.avatarGitHub(),
-			name: faker.person.fullName(),
-			connections: `${faker.number.int(100)} Connections`,
-			connected: faker.datatype.boolean(),
-		},
-
-		{
-			avatar: faker.image.avatarGitHub(),
-			name: faker.person.fullName(),
-			connections: `${faker.number.int(100)} Connections`,
-			connected: faker.datatype.boolean(),
-		},
-	];
-
-	const TeamItems = [
-		{
-			avatar: <Icon icon="devicon:react" size={36} />,
-			name: "React Developers",
-			members: `${faker.number.int(100)} Members`,
-			tag: <Badge variant="warning">Developer</Badge>,
-		},
-		{
-			avatar: <Icon icon="devicon:figma" size={36} />,
-			name: "UI Designer",
-			members: `${faker.number.int()} Members`,
-			tag: <Badge variant="info">Designer</Badge>,
-		},
-		{
-			avatar: <Icon icon="logos:jest" size={36} />,
-			name: "Test Team",
-			members: `${faker.number.int(100)} Members`,
-			tag: <Badge variant="success">Test</Badge>,
-		},
-		{
-			avatar: <Icon icon="logos:nestjs" size={36} />,
-			name: "Nest.js Developers",
-			members: `${faker.number.int(100)} Members`,
-			tag: <Badge variant="warning">Developer</Badge>,
-		},
-
-		{
-			avatar: <Icon icon="logos:twitter" size={36} />,
-			name: "Digital Marketing",
-			members: `${faker.number.int(100)} Members`,
-			tag: <Badge variant="info">Marketing</Badge>,
 		},
 	];
 
@@ -289,72 +217,6 @@ export default function ProfileTab() {
 									},
 								]}
 							/>
-						</CardContent>
-					</Card>
-				</div>
-			</div>
-			<div className="flex flex-col md:flex-row gap-4">
-				<div className="flex-1">
-					<Card>
-						<CardHeader>
-							<CardTitle className="w-full flex items-center justify-between">
-								<span>Connections</span>
-								<Button variant="ghost" size="icon">
-									<Icon icon="fontisto:more-v-a" />
-								</Button>
-							</CardTitle>
-						</CardHeader>
-						<CardContent>
-							<div className="flex w-full flex-col gap-4">
-								{ConnectionsItems.map((item) => (
-									<div className="flex" key={item.name}>
-										<img alt="" src={item.avatar} className="h-10 w-10 flex-none rounded-full" />
-										<div className="ml-4 flex flex-1 flex-col">
-											<span className="font-semibold">{item.name}</span>
-											<span className="mt-1 text-xs opacity-50">{item.connections}</span>
-										</div>
-										<div
-											className="flex h-8 w-8 flex-none items-center justify-center rounded"
-											style={{
-												backgroundColor: item.connected ? themeVars.colors.palette.primary.default : "transparent",
-												border: item.connected ? "" : `1px solid ${themeVars.colors.palette.primary.default}`,
-											}}
-										>
-											<Icon
-												icon="tdesign:user"
-												color={item.connected ? "#fff" : themeVars.colors.palette.primary.default}
-												size={20}
-											/>
-										</div>
-									</div>
-								))}
-							</div>
-						</CardContent>
-					</Card>
-				</div>
-				<div className="flex-1">
-					<Card>
-						<CardHeader>
-							<div className="flex items-center justify-between">
-								<CardTitle>Teams</CardTitle>
-								<Button variant="ghost" size="icon">
-									<Icon icon="fontisto:more-v-a" />
-								</Button>
-							</div>
-						</CardHeader>
-						<CardContent>
-							<div className="flex w-full flex-col gap-4">
-								{TeamItems.map((item) => (
-									<div className="flex" key={item.name}>
-										{item.avatar}
-										<div className="ml-4 flex flex-1 flex-col">
-											<span className="font-semibold">{item.name}</span>
-											<span className="mt-1 text-xs opacity-50">{item.members}</span>
-										</div>
-										<div className="h-6">{item.tag}</div>
-									</div>
-								))}
-							</div>
 						</CardContent>
 					</Card>
 				</div>

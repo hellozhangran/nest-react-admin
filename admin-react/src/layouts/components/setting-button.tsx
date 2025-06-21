@@ -21,17 +21,8 @@ import { type ThemeColorPresets, ThemeLayout, ThemeMode } from "#/enum";
 export default function SettingButton() {
 	const { t } = useTranslation();
 	const settings = useSettings();
-	const {
-		themeMode,
-		themeColorPresets,
-		themeLayout,
-		themeStretch,
-		breadCrumb,
-		darkSidebar,
-		fontSize,
-		fontFamily,
-		accordion,
-	} = settings;
+	const { themeMode, themeColorPresets, themeLayout, themeStretch, breadCrumb, darkSidebar, fontSize, fontFamily } =
+		settings;
 	const { setSettings } = useSettingActions();
 
 	const updateSettings = (partialSettings: Partial<SettingsType>) => {
@@ -314,10 +305,6 @@ export default function SettingButton() {
 										checked={darkSidebar}
 										onCheckedChange={(checked) => updateSettings({ darkSidebar: checked })}
 									/>
-								</div>
-								<div className="flex items-center justify-between text-sm text-text-disabled">
-									<div>{t("sys.settings.accordion")}</div>
-									<Switch checked={accordion} onCheckedChange={(checked) => updateSettings({ accordion: checked })} />
 								</div>
 							</div>
 						</div>

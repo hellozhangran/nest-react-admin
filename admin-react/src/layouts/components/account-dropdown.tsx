@@ -11,8 +11,6 @@ import {
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router";
 
-const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
-
 /**
  * Account Dropdown
  */
@@ -48,9 +46,6 @@ export default function AccountDropdown() {
 					</div>
 				</div>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem asChild>
-					<NavLink to={HOMEPAGE}>{t("sys.menu.dashboard")}</NavLink>
-				</DropdownMenuItem>
 				<DropdownMenuItem asChild>
 					<NavLink to="/management/user/profile">{t("sys.menu.user.profile")}</NavLink>
 				</DropdownMenuItem>

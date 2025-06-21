@@ -90,8 +90,8 @@
 			"management": "管理",
 			"user": {
 				"index": "用户",
-				"profile": "个人资料",
-				"account": "账户"
+				"profile": "个人中心",
+				"account": "账户设置"
 			},
 			"system": {
 				"index": "系统",
@@ -158,7 +158,6 @@
 			"breadcrumb": "面包屑",
 			"multiTab": "多标签",
 			"darkSidebar": "暗色侧边栏",
-			"accordion": "手风琴菜单",
 			"fullscreen": "全屏",
 			"exitFullscreen": "退出全屏"
 		}

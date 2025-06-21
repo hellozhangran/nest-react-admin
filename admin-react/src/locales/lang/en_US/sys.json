@@ -123,14 +123,13 @@
 			"token_expired": "Token Expired",
 			"upload": "Upload",
 			"user": {
-				"account": "Account",
+				"account": "Account Settings",
 				"index": "User",
-				"profile": "Profile"
+				"profile": "User Center"
 			},
 			"workbench": "Workbench"
 		},
 		"settings": {
-			"accordion": "Accordion Menu",
 			"breadcrumb": "BreadCrumb",
 			"darkSidebar": "Dark Sidebar",
 			"exitFullscreen": "Exit FullScreen",
