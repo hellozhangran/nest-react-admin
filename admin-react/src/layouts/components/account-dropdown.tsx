@@ -1,4 +1,3 @@
-import { useLoginStateContext } from "@/pages/sys/login/providers/login-provider";
 import { useRouter } from "@/router/hooks";
 import { useUserActions, useUserInfo } from "@/store/userStore";
 import { Button } from "@/ui/button";
@@ -20,13 +19,12 @@ const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
 export default function AccountDropdown() {
 	const { replace } = useRouter();
 	const { username, email, avatar } = useUserInfo();
+
 	const { clearUserInfoAndToken } = useUserActions();
-	const { backToLogin } = useLoginStateContext();
 	const { t } = useTranslation();
 	const logout = () => {
 		try {
 			clearUserInfoAndToken();
-			backToLogin();
 		} catch (error) {
 			console.log(error);
 		} finally {

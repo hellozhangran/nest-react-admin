@@ -1,14 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-import userService, { type LoginReq } from "@/api/services/userService";
+import userService from "@/api/services/userService";
 import { toast } from "sonner";
 import type { UserInfo, UserToken } from "#/entity";
 import { StorageEnum } from "#/enum";
-
-const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
 
 type UserStore = {
 	userInfo: Partial<UserInfo>;
@@ -54,32 +51,58 @@ export const useUserToken = () => useUserStore((state) => state.userToken);
 export const useUserPermission = () => useUserStore((state) => state.userInfo.permissions);
 export const useUserActions = () => useUserStore((state) => state.actions);
 
+// export const useLogin1 = () => {
+// 	const navigate = useNavigate();
+// 	const { setUserToken, setUserInfo } = useUserActions();
+
+// 	const loginMutation = useMutation({
+// 		mutationFn: userService.login,
+// 	});
+
+// 	const login = async (data: LoginReq) => {
+// 		try {
+// 			const res = await loginMutation.mutateAsync(data);
+// 			const { token } = res;
+// 			setUserToken({ accessToken: token, refreshToken: "" });
+// 			setUserInfo({} as any);
+// 			navigate(HOMEPAGE, { replace: true });
+// 			toast.success("Sign in success!", {
+// 				closeButton: true,
+// 			});
+// 		} catch (err) {
+// 			toast.error(err.message, {
+// 				position: "top-center",
+// 			});
+// 		}
+// 	};
+
+// 	return login;
+// };
+
 export const useLogin = () => {
-	const navigatge = useNavigate();
 	const { setUserToken, setUserInfo } = useUserActions();
 
-	const loginMutation = useMutation({
+	return useMutation({
 		mutationFn: userService.login,
-	});
-
-	const login = async (data: LoginReq) => {
-		try {
-			const res = await loginMutation.mutateAsync(data);
+		onSuccess: async (res) => {
 			const { token } = res;
 			setUserToken({ accessToken: token, refreshToken: "" });
-			setUserInfo({} as any);
-			navigatge(HOMEPAGE, { replace: true });
+			setUserInfo({
+				avatar: "https://avatars.githubusercontent.com/u/1559237?v=4",
+				email: "1234567890@qq.com",
+				username: "admin",
+				id: "1",
+			});
 			toast.success("Sign in success!", {
 				closeButton: true,
 			});
-		} catch (err) {
+		},
+		onError: (err) => {
 			toast.error(err.message, {
 				position: "top-center",
 			});
-		}
-	};
-
-	return login;
+		},
+	});
 };
 
 export default useUserStore;

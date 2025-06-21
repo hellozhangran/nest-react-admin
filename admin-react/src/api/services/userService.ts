@@ -55,7 +55,7 @@ const signup = (data: SignUpReq) => apiClient.post<SignInRes>({ url: UserApi.Sig
 const logout = () => apiClient.get({ url: UserApi.Logout });
 const findById = (id: string) => apiClient.get<UserInfo[]>({ url: `${UserApi.User}/${id}` });
 const login = (data: LoginReq) => apiClient.post<LoginRes>({ url: UserApi.Login, data });
-const getProfile = () => apiClient.get<ProfileRes>({ url: UserApi.Profile });
+const getProfile = () => apiClient.get<UserEntity>({ url: UserApi.Profile });
 const putProfile = (data: UpdateProfileReq) => apiClient.put<string>({ url: UserApi.Profile, data });
 const getUserList = (params: ListUserReq) => apiClient.get<UserEntity[]>({ url: UserApi.UserList, params });
 

@@ -12,14 +12,17 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { LoginStateEnum, useLoginStateContext } from "./providers/login-provider";
+import { useNavigate } from "react-router";
+const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
 
 export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRef<"form">) {
 	const { t } = useTranslation();
-	const [loading, setLoading] = useState(false);
 	const [remember, setRemember] = useState(true);
 
 	const { loginState, setLoginState } = useLoginStateContext();
-	const login = useLogin();
+	const loginMutation = useLogin();
+	const { mutateAsync, isPending } = loginMutation;
+	const navigate = useNavigate();
 
 	const form = useForm<LoginReq>({
 		defaultValues: {
@@ -31,11 +34,12 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
 	if (loginState !== LoginStateEnum.LOGIN) return null;
 
 	const handleFinish = async (values: LoginReq) => {
-		setLoading(true);
 		try {
-			await login(values);
-		} finally {
-			setLoading(false);
+			await mutateAsync(values);
+			navigate(HOMEPAGE, { replace: true });
+		} catch (error) {
+			// 可以处理ui展示的错误
+			console.error(error);
 		}
 	};
 
@@ -100,7 +104,7 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
 
 					{/* 登录按钮 */}
 					<Button type="submit" className="w-full">
-						{loading && <Loader2 className="animate-spin mr-2" />}
+						{isPending && <Loader2 className="animate-spin mr-2" />}
 						{t("sys.login.loginButton")}
 					</Button>
 

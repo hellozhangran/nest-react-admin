@@ -19,8 +19,7 @@ export class UserController {
   // 个人中心-用户信息
   @Get('profile')
   profile(@User() user: UserDto) {
-    // return user.user;
-    return "TODO";
+    return user.user;
   }
   
   // 个人中心-修改用户信息

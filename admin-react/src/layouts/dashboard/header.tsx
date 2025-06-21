@@ -37,17 +37,9 @@ export default function Header({ headerLeftSlot }: HeaderProps) {
 					variant="ghost"
 					size="icon"
 					className="rounded-full"
-					onClick={() => window.open("https://github.com/d3george/slash-admin")}
+					onClick={() => window.open("https://github.com/hellozhangran/nest-react-admin")}
 				>
 					<Icon icon="mdi:github" size={24} />
-				</Button>
-				<Button
-					variant="ghost"
-					size="icon"
-					className="rounded-full"
-					onClick={() => window.open("https://discord.gg/fXemAXVNDa")}
-				>
-					<Icon icon="carbon:logo-discord" size={24} />
 				</Button>
 				<NoticeButton />
 				<SettingButton />

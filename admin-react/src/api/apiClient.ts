@@ -1,7 +1,7 @@
 import axios, { type AxiosRequestConfig, type AxiosError, type AxiosResponse } from "axios";
 
 import { t } from "@/locales/i18n";
-import { useUserActions, useUserToken } from "@/store/userStore";
+import useUserStore from "@/store/userStore";
 
 import { toast } from "sonner";
 import type { Result } from "#/api";
@@ -18,7 +18,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
 	(config) => {
 		// 在请求被发送之前做些什么
-		const { accessToken } = useUserToken();
+		const { accessToken } = useUserStore.getState().userToken;
 		if (accessToken) {
 			config.headers.Authorization = `Bearer ${accessToken}`;
 		}
@@ -55,7 +55,7 @@ axiosInstance.interceptors.response.use(
 
 		const status = response?.status;
 		if (status === 401) {
-			useUserActions().clearUserInfoAndToken();
+			useUserStore.getState().actions.clearUserInfoAndToken();
 		}
 		return Promise.reject(error);
 	},
