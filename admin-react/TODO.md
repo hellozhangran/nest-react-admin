@@ -1,1 +1,2 @@
 - [ ] 该项目包含多中icon方案，如iconify、lucide-react 考虑是否可以统一
+- [ ] 干掉zustand中的persist，未来数据缓存都走react query，可以只放token 

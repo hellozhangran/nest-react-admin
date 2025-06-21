@@ -1,4 +1,3 @@
-import { DEFAULT_USER } from "@/_mock/assets";
 import type { LoginReq } from "@/api/services/userService";
 import { Icon } from "@/components/icon";
 import { useLogin } from "@/store/userStore";
@@ -21,13 +20,13 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
 
 	const { loginState, setLoginState } = useLoginStateContext();
 	const loginMutation = useLogin();
-	const { mutateAsync, isPending } = loginMutation;
+	const { mutateAsync: asyncLogin, isPending } = loginMutation;
 	const navigate = useNavigate();
 
 	const form = useForm<LoginReq>({
 		defaultValues: {
-			userName: DEFAULT_USER.username,
-			password: DEFAULT_USER.password,
+			userName: "test1",
+			password: "123456",
 		},
 	});
 
@@ -35,7 +34,7 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
 
 	const handleFinish = async (values: LoginReq) => {
 		try {
-			await mutateAsync(values);
+			await asyncLogin(values);
 			navigate(HOMEPAGE, { replace: true });
 		} catch (error) {
 			// 可以处理ui展示的错误

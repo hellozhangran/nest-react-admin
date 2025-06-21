@@ -21,6 +21,12 @@ export class UserController {
   profile(@User() user: UserDto) {
     return user.user;
   }
+
+  // 用户-用户信息，除了user.user，还包括角色，权限等信息
+  @Get('info')
+  info(@User() user: UserDto) {
+    return user.user;
+  }
   
   // 个人中心-修改用户信息
   @Put('profile')

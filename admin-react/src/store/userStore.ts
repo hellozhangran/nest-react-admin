@@ -1,8 +1,8 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-import userService from "@/api/services/userService";
+import userService, { UserApi } from "@/api/services/userService";
 import { toast } from "sonner";
 import type { UserInfo, UserToken } from "#/entity";
 import { StorageEnum } from "#/enum";
@@ -51,48 +51,28 @@ export const useUserToken = () => useUserStore((state) => state.userToken);
 export const useUserPermission = () => useUserStore((state) => state.userInfo.permissions);
 export const useUserActions = () => useUserStore((state) => state.actions);
 
-// export const useLogin1 = () => {
-// 	const navigate = useNavigate();
-// 	const { setUserToken, setUserInfo } = useUserActions();
-
-// 	const loginMutation = useMutation({
-// 		mutationFn: userService.login,
-// 	});
-
-// 	const login = async (data: LoginReq) => {
-// 		try {
-// 			const res = await loginMutation.mutateAsync(data);
-// 			const { token } = res;
-// 			setUserToken({ accessToken: token, refreshToken: "" });
-// 			setUserInfo({} as any);
-// 			navigate(HOMEPAGE, { replace: true });
-// 			toast.success("Sign in success!", {
-// 				closeButton: true,
-// 			});
-// 		} catch (err) {
-// 			toast.error(err.message, {
-// 				position: "top-center",
-// 			});
-// 		}
-// 	};
-
-// 	return login;
-// };
-
 export const useLogin = () => {
 	const { setUserToken, setUserInfo } = useUserActions();
+	const queryClient = useQueryClient();
 
 	return useMutation({
 		mutationFn: userService.login,
 		onSuccess: async (res) => {
 			const { token } = res;
 			setUserToken({ accessToken: token, refreshToken: "" });
-			setUserInfo({
-				avatar: "https://avatars.githubusercontent.com/u/1559237?v=4",
-				email: "1234567890@qq.com",
-				username: "admin",
-				id: "1",
+
+			const userInfo = await queryClient.fetchQuery({
+				queryKey: [UserApi.UserInfo],
+				queryFn: userService.getUserInfo,
 			});
+			console.log(111111, userInfo as unknown as UserInfo);
+			setUserInfo({
+				...userInfo,
+				avatar: userInfo.avatar || "https://avatars.githubusercontent.com/u/1559237?v=4",
+				email: userInfo.email || "1234567890@qq.com",
+				username: userInfo.userName || "admin",
+				id: userInfo.userId || "1",
+			} as unknown as UserInfo);
 			toast.success("Sign in success!", {
 				closeButton: true,
 			});
