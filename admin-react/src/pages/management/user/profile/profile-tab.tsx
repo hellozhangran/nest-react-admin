@@ -1,8 +1,8 @@
 import { fakeAvatars } from "@/_mock/utils";
 import { AvatarGroup } from "@/components/avatar-group";
 import { Icon } from "@/components/icon";
-import { useUserInfo } from "@/store/userStore";
 import { themeVars } from "@/theme/theme.css";
+import type { UserEntity } from "@/types/entity/index";
 import { Avatar, AvatarImage } from "@/ui/avatar";
 import { Button } from "@/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/ui/card";
@@ -22,38 +22,53 @@ interface DataType {
 	status: number;
 }
 
-export default function ProfileTab() {
-	const { username } = useUserInfo();
+export default function ProfileTab({ profile }: { profile: Partial<UserEntity> }) {
 	const AboutItems = [
 		{
 			icon: <Icon icon="fa-solid:user" size={18} />,
-			label: "Full Name",
-			val: username,
+			label: "Name",
+			val: profile?.userName,
 		},
 		{
-			icon: <Icon icon="eos-icons:role-binding" size={18} />,
-			label: "Role",
-			val: "Developer",
+			icon: <Icon icon="fa6-solid:user-astronaut" size={18} />,
+			label: "NickName",
+			val: profile?.nickName,
 		},
 		{
-			icon: <Icon icon="tabler:location-filled" size={18} />,
-			label: "Country",
-			val: "USA",
+			icon: <Icon icon="fa6-solid:book-open-reader" size={18} />,
+			label: "UserType",
+			val: profile?.userType,
 		},
 		{
-			icon: <Icon icon="ion:language" size={18} />,
-			label: "Language",
-			val: "English",
+			icon: <Icon icon="fa6-solid:transgender" size={18} />,
+			label: "Sex",
+			val: profile?.sex,
+		},
+		{
+			icon: <Icon icon="fa6-solid:address-card" size={18} />,
+			label: "Department",
+			val: profile?.deptId,
 		},
 		{
 			icon: <Icon icon="ph:phone-fill" size={18} />,
 			label: "Contact",
-			val: "(123)456-7890",
+			val: profile?.phonenumber,
 		},
 		{
 			icon: <Icon icon="ic:baseline-email" size={18} />,
 			label: "Email",
-			val: username,
+			val: profile?.email,
+		},
+		{
+			icon: (
+				<Icon
+					icon="ic:baseline-email"
+					size={18}
+					color={profile?.status === "1" ? themeVars.colors.palette.primary.default : undefined}
+				/>
+			),
+			label: "账号状态",
+			val: profile?.status === "0" ? "正常" : "停用",
 		},
 	];
 
@@ -128,7 +143,7 @@ export default function ProfileTab() {
 					<Card>
 						<CardHeader>
 							<CardTitle>About</CardTitle>
-							<CardDescription>{faker.lorem.paragraph()}</CardDescription>
+							<CardDescription>{profile?.remark || ""}</CardDescription>
 						</CardHeader>
 						<CardContent>
 							<div className="flex flex-col gap-4">
@@ -201,17 +216,6 @@ export default function ProfileTab() {
 												<Text variant="caption" color="secondary">
 													Invoices have been paid to the company.
 												</Text>
-											</div>
-										),
-									},
-									{
-										color: themeVars.colors.palette.warning.default,
-										children: (
-											<div className="flex flex-col">
-												<div className="flex items-center justify-between">
-													<Text>Public Meeting</Text>
-													<div className="opacity-50">September, 30</div>
-												</div>
 											</div>
 										),
 									},

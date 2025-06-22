@@ -24,11 +24,12 @@ export interface ProfileRes {
 }
 
 export interface UpdateProfileReq {
-	nickName: string;
-	email: string;
-	phonenumber: string;
-	sex: string;
+	nickName?: string;
+	email?: string;
+	phonenumber?: string;
+	sex?: string;
 	avatar?: string;
+	remark?: string;
 }
 
 export interface ListUserReq extends Pagination {
@@ -41,11 +42,7 @@ export interface ListUserReq extends Pagination {
 }
 
 export enum UserApi {
-	SignIn = "/auth/signin",
 	SignUp = "/auth/signup",
-	Logout = "/auth/logout",
-	Refresh = "/auth/refresh",
-	User = "/user",
 	Login = "/system/user/login",
 	Profile = "/system/user/profile",
 	UserList = "/system/user/list",
@@ -53,8 +50,6 @@ export enum UserApi {
 }
 
 const signup = (data: SignUpReq) => apiClient.post<SignInRes>({ url: UserApi.SignUp, data });
-const logout = () => apiClient.get({ url: UserApi.Logout });
-const findById = (id: string) => apiClient.get<UserInfo[]>({ url: `${UserApi.User}/${id}` });
 const login = (data: LoginReq) => apiClient.post<LoginRes>({ url: UserApi.Login, data });
 const getProfile = () => apiClient.get<UserEntity>({ url: UserApi.Profile });
 const putProfile = (data: UpdateProfileReq) => apiClient.put<string>({ url: UserApi.Profile, data });
@@ -64,8 +59,6 @@ const getUserInfo = () => apiClient.get<UserEntity>({ url: UserApi.UserInfo });
 export default {
 	login,
 	signup,
-	findById,
-	logout,
 	getProfile,
 	putProfile,
 	getUserList,

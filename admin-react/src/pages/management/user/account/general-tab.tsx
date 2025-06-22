@@ -1,55 +1,65 @@
 import { UploadAvatar } from "@/components/upload";
-import { useUserInfo } from "@/store/userStore";
+import type { UserEntity } from "@/types/entity/index";
 import { Button } from "@/ui/button";
 import { Card, CardContent, CardFooter } from "@/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/ui/form";
 import { Input } from "@/ui/input";
-import { Switch } from "@/ui/switch";
-import { Textarea } from "@/ui/textarea";
-import { faker } from "@faker-js/faker";
 import { useForm } from "react-hook-form";
+import userService, { type UpdateProfileReq } from "@/api/services/userService";
+import { RadioGroup, RadioGroupItem } from "@/ui/radio-group";
+import { Label } from "@/ui/label";
+import { useEffect } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { z } from "zod";
 import { toast } from "sonner";
 
-type FieldType = {
-	name?: string;
-	email?: string;
-	phone?: string;
-	address?: string;
-	city?: string;
-	code?: string;
-	about: string;
-};
+const UpdateProfileReqSchema: z.ZodType<UpdateProfileReq> = z.object({
+	nickName: z.string().optional(),
+	email: z.string().optional(),
+	phonenumber: z.string().optional(),
+	sex: z.string().optional(),
+	avatar: z.string().optional(),
+	// remark: z.string().optional(),
+});
 
-export default function GeneralTab() {
-	const { avatar, username, email } = useUserInfo();
-	const form = useForm<FieldType>({
-		defaultValues: {
-			name: username,
-			email,
-			phone: faker.phone.number(),
-			address: faker.location.county(),
-			city: faker.location.city(),
-			code: faker.location.zipCode(),
-			about: faker.lorem.paragraphs(),
+export default function GeneralTab({ profile }: { profile: Partial<UserEntity> }) {
+	const profileMutation = useMutation({
+		mutationFn: userService.putProfile,
+		onSuccess: () => {
+			toast.success("Update success!");
+		},
+		onError: () => {
+			toast.error("Update failed!");
 		},
 	});
 
-	const handleClick = () => {
-		toast.success("Update success!");
+	const form = useForm<z.infer<typeof UpdateProfileReqSchema>>({
+		defaultValues: {
+			nickName: "",
+			email: "",
+			phonenumber: "",
+			sex: "0",
+			avatar: "",
+			remark: "",
+		},
+	});
+
+	useEffect(() => {
+		if (profile) {
+			const parsedProfile = UpdateProfileReqSchema.parse(profile);
+			form.reset(parsedProfile);
+		}
+	}, [profile, form.reset]);
+
+	const handleSubmit = () => {
+		profileMutation.mutate(form.getValues());
 	};
 
 	return (
 		<div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
 			<div className="flex-1">
 				<Card className="flex-col px-6! pb-10! pt-20!">
-					<UploadAvatar defaultAvatar={avatar} />
-
-					<div className="flex items-center py-6 gap-2">
-						<div>Public Profile</div>
-						<Switch />
-					</div>
-
-					<Button variant="destructive">Delete User</Button>
+					<UploadAvatar defaultAvatar={profile?.avatar} />
 				</Card>
 			</div>
 			<div className="flex-2">
@@ -59,10 +69,10 @@ export default function GeneralTab() {
 							<div className="grid grid-cols-1 gap-4 md:grid-cols-2">
 								<FormField
 									control={form.control}
-									name="name"
+									name="nickName"
 									render={({ field }) => (
 										<FormItem>
-											<FormLabel>Username</FormLabel>
+											<FormLabel>NickName</FormLabel>
 											<FormControl>
 												<Input {...field} />
 											</FormControl>
@@ -83,7 +93,7 @@ export default function GeneralTab() {
 								/>
 								<FormField
 									control={form.control}
-									name="phone"
+									name="phonenumber"
 									render={({ field }) => (
 										<FormItem>
 											<FormLabel>Phone</FormLabel>
@@ -95,10 +105,31 @@ export default function GeneralTab() {
 								/>
 								<FormField
 									control={form.control}
-									name="address"
+									name="sex"
 									render={({ field }) => (
 										<FormItem>
-											<FormLabel>Address</FormLabel>
+											<FormLabel>Sex</FormLabel>
+											<FormControl>
+												<RadioGroup onValueChange={field.onChange} value={field.value} className="flex space-x-4">
+													<div className="flex items-center space-x-2">
+														<RadioGroupItem value="0" id="r-male" />
+														<Label htmlFor="r-male">男</Label>
+													</div>
+													<div className="flex items-center space-x-2">
+														<RadioGroupItem value="1" id="r-female" />
+														<Label htmlFor="r-female">女</Label>
+													</div>
+												</RadioGroup>
+											</FormControl>
+										</FormItem>
+									)}
+								/>
+								<FormField
+									control={form.control}
+									name="remark"
+									render={({ field }) => (
+										<FormItem>
+											<FormLabel>Remark</FormLabel>
 											<FormControl>
 												<Input {...field} />
 											</FormControl>
@@ -107,36 +138,12 @@ export default function GeneralTab() {
 								/>
 								<FormField
 									control={form.control}
-									name="city"
+									name="avatar"
 									render={({ field }) => (
 										<FormItem>
-											<FormLabel>City</FormLabel>
+											<FormLabel>Avatar</FormLabel>
 											<FormControl>
 												<Input {...field} />
-											</FormControl>
-										</FormItem>
-									)}
-								/>
-								<FormField
-									control={form.control}
-									name="code"
-									render={({ field }) => (
-										<FormItem>
-											<FormLabel>Code</FormLabel>
-											<FormControl>
-												<Input {...field} />
-											</FormControl>
-										</FormItem>
-									)}
-								/>
-								<FormField
-									control={form.control}
-									name="about"
-									render={({ field }) => (
-										<FormItem>
-											<FormLabel>About</FormLabel>
-											<FormControl>
-												<Textarea {...field} />
 											</FormControl>
 										</FormItem>
 									)}
@@ -145,7 +152,7 @@ export default function GeneralTab() {
 						</Form>
 					</CardContent>
 					<CardFooter>
-						<Button onClick={handleClick}>Save Changes</Button>
+						<Button onClick={handleSubmit}>Save Changes</Button>
 					</CardFooter>
 				</Card>
 			</div>
