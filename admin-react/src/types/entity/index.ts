@@ -1,4 +1,14 @@
-import type { BaseEntity } from "../entity";
+export interface BaseEntity {
+	//0代表存在 1代表删除
+	delFlag: string;
+	//0正常 1停用
+	status: string;
+	createBy: string;
+	createTime: Date;
+	updateBy: string;
+	updateTime: Date;
+	remark: string;
+}
 
 /**
  * 用户实体类

@@ -2,7 +2,6 @@ import type { BasicStatus, PermissionType } from "./enum";
 
 export interface UserToken {
 	accessToken?: string;
-	refreshToken?: string;
 }
 
 export interface UserInfo {
@@ -51,16 +50,4 @@ export interface Role {
 	order?: number;
 	desc?: string;
 	permission?: Permission[];
-}
-
-export interface BaseEntity {
-	//0代表存在 1代表删除
-	delFlag: string;
-	//0正常 1停用
-	status: string;
-	createBy: string;
-	createTime: Date;
-	updateBy: string;
-	updateTime: Date;
-	remark: string;
 }

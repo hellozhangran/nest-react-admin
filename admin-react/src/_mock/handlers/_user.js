@@ -23,7 +23,6 @@ const signIn = http.post(`/api${UserApi.SignIn}`, async ({ request }) => {
 		data: {
 			user,
 			accessToken: faker.string.uuid(),
-			refreshToken: faker.string.uuid(),
 		},
 	});
 });

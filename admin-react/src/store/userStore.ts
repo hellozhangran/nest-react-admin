@@ -59,7 +59,7 @@ export const useLogin = () => {
 		mutationFn: userService.login,
 		onSuccess: async (res) => {
 			const { token } = res;
-			setUserToken({ accessToken: token, refreshToken: "" });
+			setUserToken({ accessToken: token });
 
 			const userInfo = await queryClient.fetchQuery({
 				queryKey: [UserApi.UserInfo],
