@@ -87,11 +87,23 @@
 			"dashboard": "仪表",
 			"workbench": "工作台",
 			"analysis": "分析",
-			"management": "管理",
+			"management": "系统管理",
 			"user": {
-				"index": "用户",
+				"index": "用户管理",
 				"profile": "个人中心",
 				"account": "账户设置"
+			},
+			"role": {
+				"index": "角色管理"
+			},
+			"menu": {
+				"index": "菜单管理"
+			},
+			"department": {
+				"index": "部门管理"
+			},
+			"post": {
+				"index": "岗位管理"
 			},
 			"system": {
 				"index": "系统",

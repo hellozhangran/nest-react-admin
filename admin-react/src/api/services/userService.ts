@@ -53,7 +53,8 @@ const signup = (data: SignUpReq) => apiClient.post<SignInRes>({ url: UserApi.Sig
 const login = (data: LoginReq) => apiClient.post<LoginRes>({ url: UserApi.Login, data });
 const getProfile = () => apiClient.get<UserEntity>({ url: UserApi.Profile });
 const putProfile = (data: UpdateProfileReq) => apiClient.put<string>({ url: UserApi.Profile, data });
-const getUserList = (params: ListUserReq) => apiClient.get<UserEntity[]>({ url: UserApi.UserList, params });
+const getUserList = (params: ListUserReq) =>
+	apiClient.get<{ list: UserEntity[]; total: number }>({ url: UserApi.UserList, params });
 const getUserInfo = () => apiClient.get<UserEntity>({ url: UserApi.UserInfo });
 
 export default {

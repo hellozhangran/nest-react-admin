@@ -132,7 +132,7 @@
 
 /* slash layout */
 :root{
-  --layout-nav-width: 260px;
+  --layout-nav-width: 220px;
   --layout-nav-width-mini: 88px;
   --layout-nav-height-horizontal: 48px;
   --layout-header-height: 64px;

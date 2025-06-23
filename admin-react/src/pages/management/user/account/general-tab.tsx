@@ -19,7 +19,6 @@ const UpdateProfileReqSchema: z.ZodType<UpdateProfileReq> = z.object({
 	phonenumber: z.string().optional(),
 	sex: z.string().optional(),
 	avatar: z.string().optional(),
-	// remark: z.string().optional(),
 });
 
 export default function GeneralTab({ profile }: { profile: Partial<UserEntity> }) {
@@ -33,7 +32,7 @@ export default function GeneralTab({ profile }: { profile: Partial<UserEntity> }
 		},
 	});
 
-	const form = useForm<z.infer<typeof UpdateProfileReqSchema>>({
+	const form = useForm<UpdateProfileReq>({
 		defaultValues: {
 			nickName: "",
 			email: "",

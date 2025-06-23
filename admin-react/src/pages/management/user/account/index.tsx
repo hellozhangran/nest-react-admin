@@ -6,10 +6,11 @@ import SecurityTab from "./security-tab";
 import { useState } from "react";
 import userService, { UserApi } from "@/api/services/userService";
 import { useQuery } from "@tanstack/react-query";
+import type { UserEntity } from "@/types/entity/index";
 
 function UserAccount() {
 	const [activeTab, setActiveTab] = useState("1");
-	const { data: profile } = useQuery({
+	const { data: profile } = useQuery<Partial<UserEntity>>({
 		queryKey: [UserApi.Profile],
 		queryFn: userService.getProfile,
 	});

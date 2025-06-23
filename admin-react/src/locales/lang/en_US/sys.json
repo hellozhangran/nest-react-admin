@@ -124,8 +124,20 @@
 			"upload": "Upload",
 			"user": {
 				"account": "Account Settings",
-				"index": "User",
+				"index": "User Management",
 				"profile": "User Center"
+			},
+			"role": {
+				"index": "Role Management"
+			},
+			"menu": {
+				"index": "Menu Management"
+			},
+			"department": {
+				"index": "Department Management"
+			},
+			"post": {
+				"index": "Post Management"
 			},
 			"workbench": "Workbench"
 		},

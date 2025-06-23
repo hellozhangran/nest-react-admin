@@ -27,7 +27,8 @@ export const PostApi = {
 } as const;
 
 const getPost = (id: number) => apiClient.get<PostEntity>({ url: `${PostApi.PostGet}/${id}` });
-const getPostList = (params: ListPostReq) => apiClient.get<PostEntity[]>({ url: PostApi.PostList, params });
+const getPostList = (params: ListPostReq) =>
+	apiClient.get<{ list: PostEntity[]; total: number }>({ url: PostApi.PostList, params });
 const createPost = (data: CreatePostReq) => apiClient.post<string>({ url: PostApi.PostCreate, data });
 const updatePost = (data: UpdatePostReq) => apiClient.post<string>({ url: PostApi.PostUpdate, data });
 const deletePost = (id: number) => apiClient.post<string>({ url: `${PostApi.PostDelete}/${id}` });
