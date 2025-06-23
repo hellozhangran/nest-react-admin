@@ -33,7 +33,8 @@ export const RoleApi = {
 } as const;
 
 const getRole = (id: number) => apiClient.get<RoleEntity>({ url: `${RoleApi.RoleGet}/${id}` });
-const getRoleList = (data: ListRoleReq) => apiClient.get<RoleEntity[]>({ url: RoleApi.RoleList, data });
+const getRoleList = (data: ListRoleReq) =>
+	apiClient.get<{ list: RoleEntity[]; total: number }>({ url: RoleApi.RoleList, data });
 const createRole = (data: CreateRoleReq) => apiClient.post<string>({ url: RoleApi.RoleCreate, data });
 const updateRole = (data: UpdateRoleReq) => apiClient.post<string>({ url: RoleApi.RoleUpdate, data });
 const deleteRole = (id: number) => apiClient.post<string>({ url: `${RoleApi.RoleDelete}/${id}` });

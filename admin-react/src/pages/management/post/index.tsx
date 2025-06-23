@@ -14,6 +14,7 @@ import type { TableRowSelection } from "antd/es/table/interface";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import type { PostEntity } from "@/types/entity/index";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/ui/select";
 
 export default function PostPage() {
 	const searchForm = useForm<ListPostReq>({
@@ -173,18 +174,19 @@ export default function PostPage() {
 								render={({ field }) => (
 									<FormItem>
 										<FormLabel>状态</FormLabel>
-										<FormControl>
-											<RadioGroup onValueChange={field.onChange} value={field.value} className="flex gap-2">
-												<div className="flex items-center space-x-2">
-													<RadioGroupItem value="0" id="r1" />
-													<Label htmlFor="r1">正常</Label>
-												</div>
-												<div className="flex items-center space-x-2">
-													<RadioGroupItem value="1" id="r2" />
-													<Label htmlFor="r2">停用</Label>
-												</div>
-											</RadioGroup>
-										</FormControl>
+										<Select onValueChange={field.onChange} value={field.value ?? ""}>
+											<SelectTrigger>
+												<SelectValue placeholder="请选择状态" />
+											</SelectTrigger>
+											<SelectContent>
+												<SelectItem value="0">
+													<Badge variant="success">正常</Badge>
+												</SelectItem>
+												<SelectItem value="1">
+													<Badge variant="error">停用</Badge>
+												</SelectItem>
+											</SelectContent>
+										</Select>
 									</FormItem>
 								)}
 							/>
